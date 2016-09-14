@@ -1,10 +1,12 @@
 #include "net_tcp.h"
+//#include "net_ip.h"
 
 int
 main()
 {
-	tcp TEST;
+	tcp TEST(50);
+	//ip test(100);
 	TEST.Recv();
-	TEST.ShowPackage();
+	//test.Recv();
 	return 0;
 }

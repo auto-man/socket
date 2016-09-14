@@ -7,11 +7,43 @@
 #include<netinet/in.h>
 #include<string>
 #include<string.h>
+#include<stdio.h>
+#include<errno.h>
+#include<stdlib.h>
+#include<unistd.h>
+#include<linux/if_packet.h>
+#include<netinet/if_ether.h>
+#include<net/if.h>
 
 #define TRUE	true
 #define FALSE	false
 
 using namespace std;
+
+struct iphdr
+{
+        unsigned char           ihl:4,
+                                version:4;
+
+        unsigned char           tos;
+        unsigned short int      tot_len;
+        unsigned short int      id;
+        unsigned short int      frag_off;
+        unsigned char           ttl;
+        unsigned char           protocol;
+        unsigned short int      check;
+        unsigned int            saddr;
+        unsigned int            daddr;
+};
+
+struct ip_package
+{
+        struct iphdr    head;
+        unsigned char   opinion[40];
+        unsigned char   data[65536];
+        char            address[36];
+        ip_package*     pNext;
+};
 
 struct use_socket
 {

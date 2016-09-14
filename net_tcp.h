@@ -49,7 +49,8 @@ struct tcp_package
 {
 	struct tcphdr	head;
 	unsigned char	opinion[40];
-	char		data[2048];
+	char		data[8192];
+	char		address[36];
 	tcp_package*	pNext;
 };
 
@@ -60,8 +61,10 @@ public:
 	~tcp();
 
 	void Recv();
-	void ShowPackage();
+	void ShowPackage(tcp_package* pTemp);
+	void CutPackage(ip_package* pTemp);
 private:
+	struct ip_package*	_pIp;
 	struct tcp_package*	_pRoot;
 };
 

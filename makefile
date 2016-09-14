@@ -1,19 +1,19 @@
 
+OBJECTS = main.o net_socket.o net_tcp.o #net_ip.o
 
 
-edit : main.o net_socket.o net_tcp.o
-	g++ -g main.o net_socket.o net_tcp.o -o main
+edit : $(OBJECTS)
+	g++ -o main $(OBJECTS)
 
-main.o : net_tcp.h main.cpp
-	g++ -g -c main.cpp
-net_socket.o : net_socket.h net_socket.cpp
-	g++ -g -c net_socket.cpp
-net_tcp.o : net_socket.h net_tcp.h net_tcp.cpp
-	g++ -g -c net_tcp.cpp
+main.o : net_tcp.h #net_ip.h
 
+net_socket.o : net_socket.h
 
+net_tcp.o : net_socket.h net_tcp.h
+
+#net_ip.o : net_ip.h net_socket.h
 
 .PHONY : clean
 
 clean : 
-	rm -rf *.o *.gch main
+	-rm -rf *.o *.gch main ./src/*

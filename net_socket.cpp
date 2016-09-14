@@ -50,9 +50,18 @@ bool net_socket::Socket()
 	}
 	
 	_sockFd = socket(_s_use_socket.Af,_s_use_socket.Type,_s_use_socket.Protocol);
+
+	if(_s_use_socket.Protocol == 0)
+	{
+		bool	flag = true;
+		setsockopt(_sockFd,IPPROTO_IP,IP_HDRINCL,(char*)&flag,sizeof(flag));
+	}
+
 	if(_sockFd < 0)
 	{
 		cout<<"socket init failed."<<endl;
+		cout<<"Failed index : "<<errno<<endl;
+		cout<<"Failed socket : "<<_sockFd<<endl;
 		return false;
 	}
 	
