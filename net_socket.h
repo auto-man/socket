@@ -40,7 +40,7 @@ struct ip_package
 {
         struct iphdr    head;
         unsigned char   opinion[40];
-        unsigned char   data[65536];
+        unsigned char   data[65535];
         char            address[36];
         ip_package*     pNext;
 };

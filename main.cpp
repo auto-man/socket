@@ -4,7 +4,7 @@
 int
 main()
 {
-	tcp TEST(50);
+	tcp TEST(5);
 	//ip test(100);
 	TEST.Recv();
 	//test.Recv();

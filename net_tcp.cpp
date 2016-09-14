@@ -57,20 +57,23 @@ tcp::~tcp()
 	struct ip_package* ptemp = _pIp;
 
 	cout<<"Destroy!"<<endl;
+	cout<<_pRoot<<endl;
 
-	while(pTemp != NULL)
+	while(pTemp->pNext != NULL)
 	{
-		pTemp = _pRoot->pNext;
+		pTemp = pTemp->pNext;
 		delete _pRoot;
 		_pRoot = pTemp;
 	}
+	delete _pRoot;
 
-	while(ptemp != NULL)
+	while(ptemp->pNext != NULL)
 	{
-		ptemp = _pIp->pNext;
+		ptemp = ptemp->pNext;
                 delete _pIp;
                 _pIp = ptemp;
 	}
+	delete _pIp;
 }
 
 void tcp::Recv()
