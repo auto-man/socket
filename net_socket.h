@@ -22,6 +22,7 @@ using namespace std;
 
 struct iphdr
 {
+	// little endian
         unsigned char           ihl:4,
                                 version:4;
 

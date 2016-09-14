@@ -123,6 +123,7 @@ void tcp::Recv()
                                 memcpy(&(Temp->opinion),opinion,40);
                         }
                 }
+		cout<<"ihl : "<<(unsigned int)(Temp->head.ihl)<<endl;
 
 		other_byte = (unsigned int)(Temp->head.tot_len) - other_byte;
 		cout<<"data : "<<other_byte<<endl;
@@ -170,8 +171,14 @@ void tcp::CutPackage(ip_package* pTemp)
         unsigned long T2 = (TT>>16)&(0x000000FF);
         unsigned long T3 = (TT>>8)&(0x000000FF);
         unsigned long T4 = TT&(0x000000FF);
-        cout<<"ip : "<<T1<<"."<<T2<<"."<<T3<<"."<<T4<<endl;
+        cout<<"source ip : "<<T1<<"."<<T2<<"."<<T3<<"."<<T4<<endl;
 
+	TT = ntohl(pTemp->head.daddr);
+	T1 = (TT>>24)&(0x000000FF);
+	T2 = (TT>>16)&(0x000000FF);
+	T3 = (TT>>8)&(0x000000FF);
+	T4 = TT&(0x000000FF);
+	cout<<"dest ip : "<<T1<<"."<<T2<<"."<<T3<<"."<<T4<<endl;
 
         temp = temp & 0x000000ff;
 
